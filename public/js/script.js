@@ -1,6 +1,8 @@
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
+const socket = io();
+
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 
@@ -15,4 +17,5 @@ recognition.addEventListener('result', (e) => {
 	console.log('Confidence: ' + e.results[0][0].confidence);
 
 	// Will use socket.io here later
+	socket.emit('chat message', text);
 });
